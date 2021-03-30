@@ -1,0 +1,149 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "SOLID API Documentation",
+        "description": "This is an API built with S.O.L.I.D Patterns",
+        "version": "1.0.0",
+        "contact": {
+            "email": "pedromartins@frwk.com.br"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "sumary": "Create a User",
+                "description": "This Endpoint creates a new User",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Pedro Martins",
+                                    "email": "emailExample@example.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    },
+                    "400": {
+                        "description": "User Already Exists."
+                    },
+                    "500": {
+                        "description": "Internal Server error."
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "sumary": "List Users",
+                "description": "This Endpoint get all created Users. Only Admin users can get users!",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}/admin": {
+            "patch": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The User_ID"
+                    }
+                ],
+                "tags": [
+                    "user"
+                ],
+                "sumary": "Turn received user as an Admin",
+                "description": "Receives user by an existing ID and turn this user as an Admin.",
+                "responses": {
+                    "200": {
+                        "description": "Success and returns user profile."
+                    },
+                    "400": {
+                        "description": "ID does not Exists."
+                    },
+                    "500": {
+                        "description": "Internal Server error."
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The User_ID"
+                    }
+                ],
+                "tags": [
+                    "user"
+                ],
+                "sumary": "Show an User Profile",
+                "description": "Show an existing User Profile through UserID received",
+                "responses": {
+                    "200": {
+                        "description": "Success and returns user profile."
+                    },
+                    "400": {
+                        "description": "User does not Exists."
+                    },
+                    "500": {
+                        "description": "Internal Server error."
+                    }
+                }
+            }
+        }
+    }
+}

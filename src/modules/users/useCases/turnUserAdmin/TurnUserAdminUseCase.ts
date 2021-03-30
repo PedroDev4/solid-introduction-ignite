@@ -1,6 +1,7 @@
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
+// O que iremos receber da nossa requisição
 interface IRequest {
     user_id: string;
 }

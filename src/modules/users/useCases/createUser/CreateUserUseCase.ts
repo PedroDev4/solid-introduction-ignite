@@ -11,6 +11,7 @@ class CreateUserUseCase {
         //
     }
 
+    // Validação de email já em uso para ser usado no Controller!
     validateUserEmailinUse(email: string): boolean {
         const userEmailAlreadyExists = this.usersRepository.findByEmail(email);
 
